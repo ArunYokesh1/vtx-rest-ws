@@ -1,0 +1,6 @@
+{
+	"host": "localhost",
+	"port": 9082,
+	"pool_size": 15,
+}
+
