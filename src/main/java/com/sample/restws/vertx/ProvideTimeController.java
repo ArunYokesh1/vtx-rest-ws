@@ -19,14 +19,10 @@ public class ProvideTimeController extends Verticle {
     public void start() {
         HttpServer server = vertx.createHttpServer();
         RouteMatcher routeMatcher = new RouteMatcher();
-        routeMatcher.get("/localdatetime/:city", new Handler<HttpServerRequest>() {
+        routeMatcher.get("/localdatetime", new Handler<HttpServerRequest>() {
             public void handle(HttpServerRequest req) {
-                String city = req.params().get("city");
                 req.response().setStatusCode(200);
-                if (StringUtils.isBlank(city)) {
-                    city = "UTC";
-                }
-                TimeResponse timeResp = localdatetime(city);
+                TimeResponse timeResp = localdatetime("UTC");
                 JsonObject jsonResp = timeResp.toJson();
                 req.response().headers().add("Content-Type", "application/json");
                 req.response().end(jsonResp.encodePrettily());
