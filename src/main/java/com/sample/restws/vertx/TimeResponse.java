@@ -134,7 +134,7 @@ public class TimeResponse {
      *
      * @return the json object
      */
-    public JsonObject toJSON() {
+    public JsonObject toJson() {
         JsonObject jsonObj = new JsonObject();
         jsonObj.putString("city", this.city);
         jsonObj.putString("localTime", this.localTime);

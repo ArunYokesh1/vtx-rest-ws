@@ -1,5 +1,6 @@
 package com.sample.restws.vertx;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 import org.vertx.java.core.Handler;
@@ -22,8 +23,11 @@ public class ProvideTimeController extends Verticle {
             public void handle(HttpServerRequest req) {
                 String city = req.params().get("city");
                 req.response().setStatusCode(200);
+                if (StringUtils.isBlank(city)) {
+                    city = "UTC";
+                }
                 TimeResponse timeResp = localdatetime(city);
-                JsonObject jsonResp = timeResp.toJSON();
+                JsonObject jsonResp = timeResp.toJson();
                 req.response().headers().add("Content-Type", "application/json");
                 req.response().end(jsonResp.encodePrettily());
             }
